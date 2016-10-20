@@ -1,8 +1,8 @@
 ---
 applications:
 - name: j_app
-  path: build/libs/java-app-1.0-SNAPSHOT-all.jar
-  no-route: true
+  path: build/libs/java-app-1.0.jar
+  # no-route: true
   health-check-type: none
   services:
-  - service0
+  - p-gemfire

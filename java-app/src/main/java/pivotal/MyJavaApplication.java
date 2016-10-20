@@ -19,6 +19,7 @@ public class MyJavaApplication {
     Properties props = new Properties();
     props.setProperty("security-client-auth-init", "pivotal.ClientAuthInitialize.create");
     ClientCacheFactory ccf = new ClientCacheFactory(props);
+
     try {
       List<URI> locatorList = EnvParser.getInstance().getLocators();
       for (URI locator : locatorList) {
@@ -33,10 +34,12 @@ public class MyJavaApplication {
     } catch (IOException | URISyntaxException e) {
       throw new RuntimeException("Could not deploy Application", e);
     }
+    System.out.println("Hello world !!");
     try {
       Thread.sleep(Long.MAX_VALUE);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+
   }
 }

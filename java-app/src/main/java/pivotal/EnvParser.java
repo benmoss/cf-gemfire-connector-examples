@@ -36,6 +36,7 @@ public class EnvParser {
   public List<URI> getLocators() throws IOException, URISyntaxException {
     List<URI> locatorList = new ArrayList<URI>();
     Map credentials = getCredentials();
+    System.out.println("got credentials" + credentials.toString());
     List<String> locators = (List<String>) credentials.get("locators");
     for (String locator : locators) {
       Matcher m = p.matcher(locator);
@@ -68,16 +69,18 @@ public class EnvParser {
     ObjectMapper objectMapper = new ObjectMapper();
     Map services = objectMapper.readValue(envContent, Map.class);
     List gemfireService = getGemFireService(services);
+    System.out.println("got gemfireService" + gemfireService.toString());
     if (gemfireService != null) {
       Map serviceInstance = (Map) gemfireService.get(0);
       credentials = (Map) serviceInstance.get("credentials");
+      System.out.println("got credentials" + credentials.toString());
     }
     return credentials;
 
   }
 
   private List getGemFireService(Map services) {
-    List l = (List) services.get("p-gemfire");
+    List l = (List) services.get("user-provided");
     if (l == null) {
       throw new IllegalStateException("GemFire service is not bound to this application");
     }
